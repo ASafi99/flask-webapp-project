@@ -8,14 +8,15 @@ Below are a set of **user** stories that need to be fulfilled to complete the fi
 
 As a user I want to be able to
 
-- Create a wallet that will display my starting budget in a currency of either USD or GBP.
 - Be able to record transactions of expenses and income. 
 - Label my transactions with a category.
 - Display a full history of transcactions made.
-- Delete and edit any "Wallets", "transcations" and "category" easily. 
+- Delete and edit "transcations" and "category" easily. 
 
 Each user story will be tracked as an item on GitHub's project management section, GitHub Boards.  For each item, you should use a feature branch model to create new work.
 
-Each feature should also be fully unit tested. A feature is not complete until it has a unit test written for it.
+Each feature should also be fully unit tested. A feature is not complete until it has a unit test written for it. 
+
+After the app is ready, docker configuration and the CI/CD pipleine should be created and working. 
 
 
