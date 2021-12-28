@@ -1,0 +1,16 @@
+body{
+    box-sizing: border-box;
+    margin: 0;
+    background-color: #e4e4e4!important;
+}
+
+.jumbotron{
+    box-shadow: 0 3px 24px 0 rgb(0 0 0 / 12%);
+}
+
+.modal-tall 
+{
+ position: relative;
+ min-height: 600px;
+ padding: 15px;
+} 
