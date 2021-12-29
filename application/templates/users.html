@@ -10,8 +10,8 @@
 
          <div class="jumbotron p-3">
 
-            <h2><b> Transaction History </b> <button type="button" class="btn btn-success text-uppercase float-right"
-                  data-toggle="modal" data-target="#mymodal">Add transaction</button> </h2>
+            <h2><b>User profiles</b> <button type="button" class="btn btn-success text-uppercase float-right"
+                  data-toggle="modal" data-target="#mymodal">Add a user</button> </h2>
 
 
             {% with messages = get_flashed_messages() %}
@@ -44,23 +44,20 @@
             <table class="table table-hover table-dark">
 
                <tr>
-
-                  <th>Date</th>
-                  <th>Category</th>
-                  <th>Payment type</th>
-                  <th>Amount</th>
-                  <th>Notes</th>
+                  <th>ID</th>
+                  <th>Email</th>
+                  <th>Name</th>
+                  <th>Wallet</th>
 
                </tr>
 
 
-               {% for row in expenses %}
+               {% for row in all_users %}
                <tr>
-                  <td>{{row.date}}</td>
-                  <td>{{row.category}}</td>
-                  <td>{{row.paytype}}</td>
-                  <td>£{{row.amount}}</td>
-                  <td>{{row.notes}}</td>
+                  <td>{{row.id}}</td>
+                  <td>{{row.email}}</td>
+                  <td>{{row.name}}</td>
+                  <td>{{row.wallet}}</td>
 
                   <td>
                      <a href="/update/{{row.id}}" class="btn btn-warning btn-xs" data-toggle="modal"
@@ -94,14 +91,14 @@
                         <div class="modal-body">
 
 
-                           <form action="{{url_for('addTransaction')}}" method="POST">
+                           <form action="{{url_for('addUser')}}" method="POST">
 
 
                               <div class="form-group">
 
 
                                  <label>Name:</label>
-                                 <input type="hidden" name="id" value="{{row.id}}">
+                                 <input type="hidden" name="id" >
 
                                  <input type="text" class="form-control" name="name" value="{{row.name}}">
 
@@ -120,17 +117,14 @@
 
                               </div>
 
-
                               <div class="form-group">
 
+                              <label>Wallet:</label>
 
-                                 <label>Phone:</label>
-
-                                 <input type="text" class="form-control" name="phone" value="{{row.phone}}">
+                              <input type="text" class="form-control" name="wallet" value="{{row.wallet}}">
 
 
-                              </div>
-
+                           </div>
 
                               <div class="form-group">
 
@@ -182,68 +176,49 @@
                <div class="modal-content">
                   <div class="modal-header">
 
-                     <h4 class="modal-title">Add Expense</h4>
+                     <h4 class="modal-title">Add User</h4>
                   </div>
                   <div class="modal-body">
 
-                     <form method="POST" action="{{url_for('addTransaction')}}">
+                     <form method="POST" action="{{url_for('addUser')}}">
 
 
-                        <div class="form-group">
-
-                           <label>Date of expense:</label>
-                           <input type="date" class="form-control" name="date" required="1">
+                              <div class="form-group">
 
 
-                        </div>
+                                 <label>Name:</label>
+                                 <input type="hidden" name="id" >
+
+                                 <input type="text" class="form-control" name="name">
 
 
-                        <div class="form-group">
+                              </div>
 
 
-                           <label>Amount (£):</label>
-                           <input type="number" class="form-control" name="amount" required="1">
+
+                              <div class="form-group">
 
 
-                        </div>
+                                 <label>Email:</label>
+
+                                 <input type="text" class="form-control" name="email">
 
 
-                        <div class="form-group">
+                              </div>
+
+                              <div class="form-group">
+
+                              <label>Wallet:</label>
+
+                              <input type="text" class="form-control" name="wallet">
 
 
-                           <label>Pay type:</label>
-                           <select class="form-control" id="paytype" name="paytype">
-                              <option value="">--Please choose an option--</option>
-                              <option value="cash">Cash</option>
-                              <option value="debit-card">Debit Card</option>
-                              <option value="Credit">Credit</option>
-                           </select>
-                        </div>
-
-                        <div class="form-group">
+                           </div>
 
 
-                           <label>Category:</label>
-                           <select class="form-control" id="category" name="category">
-                              <option value="">--Please choose an option--</option>
-                              <option value="grocery">Groceries</option>
-                              <option value="travel">Travel</option>
-                              <option value="Credit">Credit</option>
-                           </select>
-                        </div>
-
-                        <div class="form-group">
-                           <label for="notes">Notes</label>
-                           <textarea class="form-control" id="notes" rows="3" name="notes"></textarea>
-                        </div>
-
-                        <div class="form-group">
+                           <button class="btn btn-primary" type="submit">Add User</button>
 
 
-                           <button class="btn btn-primary" type="submit">Add Expense</button>
-
-
-                        </div>
 
                   </div>
 
@@ -266,10 +241,6 @@
 
 
          </div>
-
-
-
-
 
       </div>
 
