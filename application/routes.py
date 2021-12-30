@@ -3,37 +3,15 @@ from flask.helpers import flash
 from application.models import Transactions, Users
 from application import app,db
 
-@app.route('/expenses')
-def Transaction(): 
-    name_user = request.values.get("user")
-    expenses_user = Transactions.query.all()
-    # all_data = Transactions.query.all()
-    return render_template("expenses.html", expenses = expenses_user,isUsers=False)
-
-@app.route('/addExpenses',methods=['POST'])
-def addTransaction():
-
-    # name_user = request.values.get("user")
-    
-    date = request.form['date']
-    amount = request.form['amount']
-    paytype = request.form['paytype']
-    category = request.form['category']
-    notes = request.form['notes']
-    
-    my_data = Transactions(date,amount,paytype,category,notes)
-    db.session.add(my_data)
-    db.session.commit()
-    print(date +  " " + amount + " " + paytype + " " + category)
-
-    flash('Transaction has been successfully added!')
-    return redirect(url_for('Transactions'))
-
 @app.route('/')
 @app.route('/users')
 def User_page(): 
-    all_users = Users.query.all()
-    return render_template("users.html", all_users = all_users, isUsers=True)
+    count_users = Users.query.count()
+    if count_users==0: 
+        return render_template("users.html")
+    else: 
+        all_users = Users.query.all()
+        return render_template("users.html", all_users = all_users)
 
 @app.route('/addUsers',methods=['POST'])
 def addUser(): 
@@ -51,6 +29,51 @@ def addUser():
     flash('User has been successfully added!')
 
     return redirect(url_for('User_page'))
+
+@app.route('/expenses')
+def Transaction(): 
+    userid = request.values.get("userid")
+    user_name = request.values.get("name")
+
+    if userid ==None: 
+        return redirect (url_for("User_page"))
+    else: 
+        expenses_user = db.session.query(Transactions).join(Users).filter(Users.id ==userid).all()
+       
+
+        if expenses_user==[]: 
+            return render_template("expenses.html", name_user = user_name, userid=userid)
+        else: 
+            query = Transactions.query.filter (Transactions.expense_userid== userid).all()
+
+            Total_amount = 0
+            for data in query: 
+                data.amount
+                Total_amount +=data.amount
+            total_amount = round(Total_amount,2)
+
+            return render_template("expenses.html", expenses=expenses_user, name_user = user_name, userid=userid, total =total_amount) 
+
+@app.route('/addExpenses',methods=['POST'])
+def addTransaction():
+
+    userid = request.form["id"]
+  
+    
+    date = request.form['date']
+    amount = request.form['amount']
+    paytype = request.form['paytype']
+    category = request.form['category']
+    notes = request.form['notes']
+    
+    my_data = Transactions(date,amount,paytype,category,notes,userid)
+    db.session.add(my_data)
+    db.session.commit()
+    print(date +  " " + amount + " " + paytype + " " + category)
+
+    flash('Transaction has been successfully added!')
+    return redirect(url_for('Transaction'))
+
 
 # @app.route('/update', methods = ['GET', 'POST'])
 # def update():
