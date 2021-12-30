@@ -7,6 +7,7 @@
 <div class="container">
    <div class="row">
       <div class="col md-12">
+         <span class = "line">Hello, {{ name_user }}, these are your expenses:</span>
 
          <div class="jumbotron p-3">
 
@@ -169,6 +170,7 @@
 
             </table>
 
+            <p>Total Expended Amount (£): {{ total }}</p>
 
          </div>
 
@@ -190,7 +192,7 @@
 
 
                         <div class="form-group">
-
+                           <input type="hidden" name="id" value = {{ userid }} >
                            <label>Date of expense:</label>
                            <input type="date" class="form-control" name="date" required="1">
 
@@ -240,7 +242,7 @@
                         <div class="form-group">
 
 
-                           <button class="btn btn-primary" type="submit">Add Expense</button>
+                           <button class="btn btn-primary" type="submit" >Add Expense</button>
 
 
                         </div>
@@ -266,10 +268,6 @@
 
 
          </div>
-
-
-
-
 
       </div>
 
