@@ -95,43 +95,58 @@
                         <div class="modal-body">
 
 
-                           <form action="{{url_for('addTransaction')}}" method="POST">
+                           <form action="{{url_for('update_expenses')}}" method="POST">
 
 
                               <div class="form-group">
-
-
-                                 <label>Name:</label>
-                                 <input type="hidden" name="id" value="{{row.id}}">
-
-                                 <input type="text" class="form-control" name="name" value="{{row.name}}">
-
-
+                                 <input type="hidden" name="id" value = {{ userid }} >
+                                 <input type="hidden" name="name" value = {{ name_user }} >
+                                 <label>Date of expense:</label>
+                                 <input type="date" class="form-control" name="date" required="1" value="{{row.date}}">
+      
+      
                               </div>
-
-
-
+      
+      
                               <div class="form-group">
-
-
-                                 <label>Email:</label>
-
-                                 <input type="text" class="form-control" name="email" value="{{row.email}}">
-
-
+      
+      
+                                 <label>Amount (£):</label>
+                                 <input type="number" class="form-control" name="amount" required="1" value="{{row.amount}}">
+      
+      
                               </div>
-
-
+      
+      
                               <div class="form-group">
-
-
-                                 <label>Phone:</label>
-
-                                 <input type="text" class="form-control" name="phone" value="{{row.phone}}">
-
-
+      
+      
+                                 <label>Pay type:</label>
+                                 <select class="form-control" id="paytype" name="paytype" value="{{row.paytype}}">
+                                    <option value="">--Please choose an option--</option>
+                                    <option value="cash">Cash</option>
+                                    <option value="debit-card">Debit Card</option>
+                                    <option value="Credit">Credit</option>
+                                 </select>
                               </div>
-
+      
+                              <div class="form-group">
+      
+      
+                                 <label>Category:</label>
+                                 <select class="form-control" id="category" name="category" value="{{row.category}}">
+                                    <option value="">--Please choose an option--</option>
+                                    <option value="grocery">Groceries</option>
+                                    <option value="travel">Travel</option>
+                                    <option value="Credit">Credit</option>
+                                 </select>
+                              </div>
+      
+                              <div class="form-group">
+                                 <label for="notes">Notes</label>
+                                 <textarea class="form-control" id="notes" rows="3" name="notes">{{row.notes}}</textarea>
+                              </div>
+      
 
                               <div class="form-group">
 

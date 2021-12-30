@@ -1,4 +1,4 @@
-from flask import render_template, request, redirect, session,url_for, session
+from flask import render_template, request, redirect, session,url_for, session,Flask
 from flask.helpers import flash
 from application.models import Transactions, Users
 from application import app,db
@@ -35,24 +35,22 @@ def Transaction():
     userid = request.values.get("userid")
     user_name = request.values.get("name")
 
-    if userid ==None: 
-        return redirect (url_for("User_page"))
+
+    expenses_user = db.session.query(Transactions).join(Users).filter(Users.id ==userid).all()
+    
+
+    if expenses_user==[]: 
+        return render_template("expenses.html", name_user = user_name, userid=userid)
     else: 
-        expenses_user = db.session.query(Transactions).join(Users).filter(Users.id ==userid).all()
-       
+        query = Transactions.query.filter (Transactions.expense_userid== userid).all()
 
-        if expenses_user==[]: 
-            return render_template("expenses.html", name_user = user_name, userid=userid)
-        else: 
-            query = Transactions.query.filter (Transactions.expense_userid== userid).all()
+        Total_amount = 0
+        for data in query: 
+            data.amount
+            Total_amount +=data.amount
+        total_amount = round(Total_amount,2)
 
-            Total_amount = 0
-            for data in query: 
-                data.amount
-                Total_amount +=data.amount
-            total_amount = round(Total_amount,2)
-
-            return render_template("expenses.html", expenses=expenses_user, name_user = user_name, userid=userid, total =total_amount) 
+        return render_template("expenses.html", expenses=expenses_user, name_user = user_name, userid=userid, total =total_amount) 
 
 @app.route('/addExpenses',methods=['POST'])
 def addTransaction():
@@ -72,21 +70,34 @@ def addTransaction():
     print(date +  " " + amount + " " + paytype + " " + category)
 
     flash('Transaction has been successfully added!')
-    return redirect(url_for('Transaction'))
+    return redirect(f"/expenses?userid={userid}")
 
+@app.route('/update_expenses', methods=['GET', 'POST'] )
+def update_expenses():   
+    
 
-# @app.route('/update', methods = ['GET', 'POST'])
-# def update():
- 
-#     if request.method == 'POST':
-#         my_data = Data.query.get(request.form.get('id'))
- 
-#         my_data.name = request.form['name']
-#         my_data.email = request.form['email']
-#         my_data.phone = request.form['phone']
- 
-#         db.session.commit()
-#         flash("Employee Updated Successfully")
- 
-#         return redirect(url_for('Index'))    
+    my_data = Transactions.query.get(request.form.get('id'))
 
+    name_user = request.form["name"]
+    userid = request.form["id"]
+
+    my_data.date = request.form['date']
+    my_data.amount = request.form['amount']
+    my_data.paytype = request.form['paytype']
+    my_data.category = request.form['category']
+    my_data.notes = request.form['notes']
+
+    db.session.commit()
+    flash("Expense Updated Successfully")
+
+    return redirect(f"/expenses?userid={userid} &name={name_user}")
+    
+ 
+@app.route('/delete/<id>/', methods = ['GET', 'POST'])
+def delete(id):
+    my_data = Transactions.query.get(id)
+    db.session.delete(my_data)
+    db.session.commit()
+    flash("Expense Deleted Successfully")
+ 
+    return redirect(url_for('User_page'))
