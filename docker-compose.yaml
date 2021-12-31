@@ -1,0 +1,12 @@
+version: "3.8"
+services:
+  frontend:
+    build: .
+    image: expense-tracker:latest
+    container_name: expense-tracker-app
+    ports:
+    - target: 5000
+      published: 80
+    ports:
+    - target: 5000
+      published: 5000

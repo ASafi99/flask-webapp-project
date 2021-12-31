@@ -2,5 +2,5 @@
 
 echo "Build stage"
 
-#build images
+# build images
 docker-compose build
