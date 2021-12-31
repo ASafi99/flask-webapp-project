@@ -1,6 +1,6 @@
 version: "3.8"
 services:
-  frontend:
+  app:
     build: .
     image: expense-tracker:latest
     container_name: expense-tracker-app
