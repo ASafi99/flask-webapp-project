@@ -2,4 +2,4 @@
 
 echo "Deploy stage"
 
-ssh jenkins@dev-jenkins docker stack deploy --compose file docker-compose.yaml expense-tracker
+ssh jenkins@swarm-manager docker stack deploy --compose file docker-compose.yaml expense-tracker
