@@ -2,7 +2,7 @@
 
 echo "Setup stage"
 
- install apt dependencies
+install apt dependencies
 sudo apt update 
 sudo apt install python3 python3-venv python3-pip -y
 
@@ -12,8 +12,6 @@ source venv/bin/activate
 
 # install pip requirements
 pip3 install -r requirements.txt
-
-python3 app.py
 
 # apt dependencies
 sudo apt-get update

@@ -1,8 +1,8 @@
 version: "3.8"
 services:
-  app:
+  expense-tracker-app:
     build: .
-    image: expense-tracker:latest
+    image: ${DOCKER_HUB_CREDS_USR}/ expense-tracker:latest
     container_name: expense-tracker-app
     ports:
     - target: 5000
