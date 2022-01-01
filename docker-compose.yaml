@@ -5,5 +5,5 @@ services:
     image: ${DOCKER_HUB_CREDS_USR}/expense-tracker:latest
     build: .
     ports:
-    - target: 80
-      published: 8080
+    - target: 5000
+      published: 5000
