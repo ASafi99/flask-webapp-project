@@ -7,3 +7,19 @@ services:
     ports:
     - target: 5000
       published: 5000
+    environment:
+      DATABASE_URI: ${DATABASE_URI}
+    depends_on:
+      - database
+  database:
+    container_name: expense_database
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD:
+      MYSQL_DATABASE: expense
+    volumes:
+      - type: volume
+        source: expense_database_volume
+        target: /var/lib/mysql
+volumes:
+  todo_database_volume: 
