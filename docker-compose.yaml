@@ -14,8 +14,12 @@ services:
   database:
     container_name: expense_database
     image: mysql:5.7
+    ports:
+      - 3306:3306
     environment:
       MYSQL_ROOT_PASSWORD: password
+      MYSQL_USER: root
+      MYSQL_PASSWORD: password
       MYSQL_DATABASE: expense
     volumes:
       - type: volume
