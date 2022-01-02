@@ -7,23 +7,14 @@ services:
     ports:
     - target: 5000
       published: 5000
-    # environment:
-    #   DATABASE_URI: mysql+pymysql://root:password@expense_database:3306/expense
+    environment:
+      DATABASE_URI: mysql+pymysql://root:password@db:3306/sqlalchemy
     depends_on:
-      - database
-  database:
-    container_name: expense_database
-    image: mysql:5.7
+      - mysql
+  db:
+    image: mysql
     ports:
       - 3306:3306
     environment:
       MYSQL_ROOT_PASSWORD: password
-      MYSQL_USER: root
-      MYSQL_PASSWORD: password
-      MYSQL_DATABASE: expense
-    volumes:
-      - type: volume
-        source: expense_database_volume
-        target: /var/lib/mysql
-volumes:
-  expense_database_volume: 
+      MYSQL_HOST: db

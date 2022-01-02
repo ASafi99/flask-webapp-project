@@ -9,7 +9,7 @@ template_folder='templates'
 )
 
 # app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///data.db"
-app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://root:password@expense_database:3306/expense"
+app.config['SQLALCHEMY_DATABASE_URI'] = getenv("DATABASE_URI")
 app.config['SECRET_KEY'] = str(uuid.uuid4()) # generating a random secret key at app startup
 
 db = SQLAlchemy(app)
