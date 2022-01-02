@@ -75,22 +75,22 @@ def addTransaction():
 @app.route('/update_expenses', methods=['GET', 'POST'] )
 def update_expenses():   
     
+    if request.method == 'POST':
+        my_data = Transactions.query.get(request.form.get('id'))
 
-    my_data = Transactions.query.get(request.form.get('id'))
+        name_user = request.form["name"]
+        userid = request.form["userid"]
 
-    name_user = request.form["name"]
-    userid = request.form["id"]
+        my_data.date = request.form['date']
+        my_data.amount = request.form['amount']
+        my_data.paytype = request.form['paytype']
+        my_data.category = request.form['category']
+        my_data.notes = request.form['notes']
 
-    my_data.date = request.form['date']
-    my_data.amount = request.form['amount']
-    my_data.paytype = request.form['paytype']
-    my_data.category = request.form['category']
-    my_data.notes = request.form['notes']
+        db.session.commit()
+        flash("Expense Updated Successfully")
 
-    db.session.commit()
-    flash("Expense Updated Successfully")
-
-    return redirect(f"/expenses?userid={userid} &name={name_user}")
+    return redirect(f"/expenses?userid={userid}&name={name_user}")
     
  
 @app.route('/delete/<id>/', methods = ['GET', 'POST'])
