@@ -7,8 +7,8 @@ services:
     ports:
     - target: 5000
       published: 5000
-    environment:
-      DATABASE_URI: mysql+pymysql://root:password@expense_database:3306/expense
+    # environment:
+    #   DATABASE_URI: mysql+pymysql://root:password@expense_database:3306/expense
     depends_on:
       - database
   database:
