@@ -78,16 +78,29 @@ class Test_Add_Expenses (TestBase):
     
 class Test_Update_Expenses (TestBase): 
 
-    def test_delete_expense(self): 
-        
-        response = self.client.get("/expenses?userid=1&name=John")
-        self.assertIn(b'Delete', response.data)
 
     def test_update_expense(self): 
         
+        response = self.client.post(("/update_expenses/1"), 
+                                    data = dict(
+                                id = 1, 
+                                date = "2021-12-22", 
+                                amount = 20, 
+                                paytype = "Cash",
+                                category = "Travel",
+                                notes= "travel for business",
+                                expense_userid = 1
+                                ),
+                                follow_redirects=True)
+        self.assertIn(b'Not Found', response.data)      
+
+    def test_delete_expense(self): 
+        
         response = self.client.post("/delete/1/")
         response1 = self.client.get ("/expenses?userid=1&name=John") 
-        self.assertIn(b'Expense Deleted Successfully', response1.data)
+        self.assertIn(b'Expense Deleted Successfully', response1.data)  
+
+    
         
 class Test_Post_User (TestBase): 
 

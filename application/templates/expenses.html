@@ -64,7 +64,7 @@
                   <td>{{row.notes}}</td>
 
                   <td>
-                     <a href="/update/{{row.id}}" class="btn btn-warning btn-xs" data-toggle="modal"
+                     <a href="/update_expenses/{{row.id}}" class="btn btn-warning btn-xs" data-toggle="modal"
                         data-target="#modaledit{{row.id}}">Edit</a>
                      <a href="/delete/{{row.id}}" class="btn btn-danger btn-xs"
                         onclick="return confirm('Are You Sure To Delete ?')">Delete</a>
@@ -99,7 +99,8 @@
 
 
                               <div class="form-group">
-                                 <input type="hidden" name="id" value = {{ userid }} >
+                                 <input type="hidden" name="id" value = {{ row.id }} >
+                                 <input type="hidden" name="userid" value = {{ userid }} >
                                  <input type="hidden" name="name" value = {{ name_user }} >
                                  <label>Date of expense:</label>
                                  <input type="date" class="form-control" name="date" required="1" value="{{row.date}}">
