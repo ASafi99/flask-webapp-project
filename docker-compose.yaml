@@ -8,15 +8,15 @@ services:
     - target: 5000
       published: 5000
     environment:
-      DATABASE_URI: mysql+pymysql://root:password@db:3306/db
+      DATABASE_URI: mysql+pymysql://root:password@db:3306/expense
     depends_on:
       - mysql
   db:
     image: mysql:5.7
-    restart: always
     hostname: db
     ports:
       - 3306:3306
     environment:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_HOST: db
+      MYSQL_DATABASE: expense
