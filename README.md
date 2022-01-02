@@ -50,7 +50,7 @@ The following Risk Assessment identifies hazards and risk factors that have the 
 ![risk-project](https://user-images.githubusercontent.com/56398402/147888998-a15a6197-50d5-4e21-b627-beea4f4682dc.png)
 
 
-### Relational Database
+## Relational Database
 
 The following diagram ERD diagram shows the two entities: User and Expenses and their one to many relationship - a user can have many expenses but an expense entry can only have one User. 
 
@@ -60,7 +60,7 @@ Expenses will store the information about the type of expenses of each user, a d
 
 ![erd-project](https://user-images.githubusercontent.com/56398402/147888961-9b379e71-1b33-400a-99fe-0f2a1a03dc69.png)
 
-### Infrastructure - CI/CD Pipeline
+## Infrastructure - CI/CD Pipeline
 
 Continuous Integration and deployment is implemented throughout my project in order to allow rapid and smooth development-to-deployment. The approach I have taken allows deploying new versions of the application with limited down-time.
 
@@ -72,10 +72,10 @@ Dependencies are installed and user is logged into Docker.
 2. Test: pytest
 Unit tests are run via pytest which produces junit reports and coberatura coverage reports available to view live in the build execution.
 
-2. & 3. Build & Push: docker-compose
+3. & 4. Build & Push: docker-compose
 Jenkins' credentials system is used to handle logging into DockerHub, and the new images are then pushed to the repository specified.
 
-4. Deploy: docker swarm/stack
+5. Deploy: docker swarm/stack
 Jenkins copies the docker-compose.yaml file over to the manager node, SSH's onto it, and then runs docker stack deploy where our application will be hosted along with the database. 
 
 
@@ -84,13 +84,32 @@ Jenkins copies the docker-compose.yaml file over to the manager node, SSH's onto
 
 ![stage-view](https://user-images.githubusercontent.com/56398402/147889312-877e88e5-86ef-4e91-88f1-c0374b3adc74.png)
 
-### Test results & Coverage
+## Test results & Coverage
 
 The app so far has a coverage level of above 85%. The coberatura plugin was used to automate coverage reports in Jenkins. 
 
 ![test-coverage](https://user-images.githubusercontent.com/56398402/147889336-fd896593-7cbb-4dd7-bc97-fd56a26de968.png)
 ![cobreatura-cov](https://user-images.githubusercontent.com/56398402/147889348-dc08aa64-3b18-4105-b98b-67244bb18720.png)
 
+## Demonstration
+
+The link below is a 5 min video demonstration of the application and pipeline. It demonstrates the app in full, the CI/CD pipeline in action, and a rolling update show from start to finish. 
+
+https://drive.google.com/file/d/1lsDDSE_KIFJ4BFkzHfi9Jkv5tri5oi8w/view?usp=sharing .mp4
+
+https://drive.google.com/file/d/1jrmkJuYs_JzPevzAxGquP_nqdz6DjU9c/view?usp=sharing .mov
+
+
+
+## Footer
+
+### Future Improvements
+Add reports for single user and overall
+Add create your own cateogry and assign them feature
+A better UI design.
+
+### Author
+Oliver Nichols
 
 
 
