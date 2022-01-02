@@ -22,4 +22,4 @@ services:
         source: expense_database_volume
         target: /var/lib/mysql
 volumes:
-  todo_database_volume: 
+  expense_database_volume: 
