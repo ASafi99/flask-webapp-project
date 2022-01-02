@@ -101,4 +101,3 @@ def delete(id):
     flash("Expense Deleted Successfully")
  
     return redirect(url_for('User_page'))
-    
