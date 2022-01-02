@@ -109,8 +109,7 @@ Add create your own cateogry and assign them feature
 A better UI design.
 
 ### Author
-Oliver Nichols
-
+Akbar Safi
 
 
 
