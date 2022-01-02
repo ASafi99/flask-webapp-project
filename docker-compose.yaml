@@ -8,14 +8,14 @@ services:
     - target: 5000
       published: 5000
     environment:
-      DATABASE_URI: ${DATABASE_URI}
+      DATABASE_URI: mysql+pymysql://root:password@expense_database:3306/expense
     depends_on:
       - database
   database:
     container_name: expense_database
     image: mysql:5.7
     environment:
-      MYSQL_ROOT_PASSWORD:
+      MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: expense
     volumes:
       - type: volume
