@@ -8,11 +8,13 @@ services:
     - target: 5000
       published: 5000
     environment:
-      DATABASE_URI: mysql+pymysql://root:password@db:3306/sqlalchemy
+      DATABASE_URI: mysql+pymysql://root:password@db:3306/db
     depends_on:
       - mysql
   db:
-    image: mysql
+    image: mysql:5.7
+    restart: always
+    hostname: db
     ports:
       - 3306:3306
     environment:
