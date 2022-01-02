@@ -10,12 +10,12 @@ source venv/bin/activate
 pip3 install pytest pytest-cov flask_testing
 pip3 install -r requirements.txt
 
-mkdir test-reports
+mkdir test_reports
 
 # run pytest
 python3 -m pytest \
     --cov=application \
-    --cov-report term missing \
+    --cov-report term-missing \
     --cov-report xml:test_reports/coverage.xml \
     --junitxml=test_reports/junit_report.xml
 
